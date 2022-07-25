@@ -1,6 +1,3 @@
-#include <Arduino.h>
-#include "pico/stdlib.h"
-
 #include <SPI.h>
 #include <Adafruit_ST7789.h>      // Hardware-specific library for ST7789
 #include <Adafruit_GFX.h>         // Core graphics library
@@ -38,18 +35,12 @@ const int height = 170;
 const int STARTX1 = (width / 4) - 12;
 const int STARTX2 = (width - STARTX1) - 6;
 
-int charWidth;
-int charHeight;
-
 const uint16_t backgroundColor = ST77XX_DARKGREEN;
 
 bool playIntro = true;
 bool ledOn = true;
 
 int lastPlayer = 1;
-
-int brightness = 0;
-int fadeAmount = 5;
 
 uint16_t localTime = millis();
 
@@ -205,8 +196,6 @@ void cycleLed(){
 }
 
 void setup() {
-    ImageReturnCode stat;
-
     tft.init(height, width);
     tft.setRotation(3);
     tft.fillScreen(backgroundColor);

@@ -9,7 +9,8 @@
 * Wire
 * SD card
 * USB cable
-* PlatformIO
+* CMake
+* PlatformIO (https://platformio.org/)
 
 BMP converted via ImageMagick:
 ```
