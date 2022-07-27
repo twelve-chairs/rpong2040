@@ -25,19 +25,19 @@ SdFat SD;                         // SD card filesystem
 Adafruit_ImageReader reader(SD);  // Image-reader object, pass in SD filesys
 
 Adafruit_ST7789 tft = Adafruit_ST7789(TFT_CS, TFT_DC, TFT_RST);
-Adafruit_Image img;     // An image loaded into RAM
+//Adafruit_Image img;     // An image loaded into RAM
 
 Adafruit_NeoPixel pixels(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
 
-const int width = 320;
-const int height = 170;
+const uint16_t width = 320;
+const uint16_t height = 170;
 
-const int STARTX1 = (width / 4) - 12;
-const int STARTX2 = (width - STARTX1) - 6;
+const uint16_t STARTX1 = (width / 4) - 12;
+const uint16_t STARTX2 = (width - STARTX1) - 6;
 
 const uint16_t backgroundColor = ST77XX_DARKGREEN;
 
-bool playIntro = true;
+//bool playIntro = true;
 bool ledOn = true;
 
 int lastPlayer = 1;
@@ -187,10 +187,10 @@ bool checkCollision(){
 
 void cycleLed(){
     if (ledOn){
-        pixels.setPixelColor(0, pixels.Color(255, 255, 255));
+        pixels.setPixelColor(0, Adafruit_NeoPixel::Color(255, 255, 255));
     }
     else {
-        pixels.setPixelColor(0, pixels.Color(0, 0, 0));
+        pixels.setPixelColor(0, Adafruit_NeoPixel::Color(0, 0, 0));
     }
     pixels.show();
 }
@@ -227,23 +227,20 @@ void setup() {
 
 void loop() {
     ledOn = false;
+    long player1Pin = map(analogRead(POTENTIOMETER_PIN1), 0, 1023, 2, 120);
+    long player2Pin = map(analogRead(POTENTIOMETER_PIN2), 1023, 0, 2, 120);
 
     drawField();
 
+    // Ball
     tft.fillCircle(ball.x, ball.y, ball.radius + 1, backgroundColor);
-
     ball.x = ball.x + ball.ballDirection;
     ball.y = ball.y + ball.ballUp;
-
     tft.drawCircle(ball.x, ball.y, ball.radius + 1, ST77XX_BLACK);
     tft.fillCircle(ball.x, ball.y, ball.radius, ST77XX_YELLOW);
 
-    auto player1Pin = map(analogRead(POTENTIOMETER_PIN1), 0, 1023, 2, 120);
-    auto player2Pin = map(analogRead(POTENTIOMETER_PIN2), 1023, 0, 2, 120);
-
-    bool collision = checkCollision();
-
-    if (collision || (player1.y != player1Pin) || (player2.y != player2Pin) ){
+    // Players
+    if (checkCollision() || (player1.y != player1Pin) || (player2.y != player2Pin) ){
         tft.fillRect(player1.x, player1.y, player1.width, player1.height, backgroundColor);
         player1.y = player1Pin;
         tft.fillRect(player1.x, player1.y, player1.width, player1.height, player1.color);
@@ -253,6 +250,7 @@ void loop() {
         tft.fillRect(player2.x, player2.y, player2.width, player2.height, player2.color);
     }
 
+    // Score board
     if (ball.y >= 2 && ball.y <= 22){
         if (ball.x >= STARTX1 - 10 && ball.x <= STARTX1 + 30){
             updateScore1();
