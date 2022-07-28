@@ -1,6 +1,5 @@
 #include <SPI.h>
 #include <Adafruit_ST7789.h>      // Hardware-specific library for ST7789
-//#include <Adafruit_GFX.h>         // Core graphics library
 #include <Adafruit_ImageReader.h> // Image-reading functions
 #include <Adafruit_NeoPixel.h>
 #include <iostream>
