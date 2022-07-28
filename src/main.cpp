@@ -1,6 +1,6 @@
 #include <SPI.h>
 #include <Adafruit_ST7789.h>      // Hardware-specific library for ST7789
-#include <Adafruit_GFX.h>         // Core graphics library
+//#include <Adafruit_GFX.h>         // Core graphics library
 #include <Adafruit_ImageReader.h> // Image-reading functions
 #include <Adafruit_NeoPixel.h>
 #include <iostream>
@@ -12,8 +12,6 @@
 
 #define ST77XX_PINK       0xFB9B
 #define ST77XX_DARKGREEN  0x0BA8
-
-#define USE_SD_CARD
 
 #define PIN         16
 #define NUMPIXELS   1
