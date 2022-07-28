@@ -1,5 +1,4 @@
 .pio
 CMakeListsPrivate.txt
-CMakeListsUser.txt
+CMakeLists.txt
 cmake-build-*/
-!/CMakeListsUser.txt
