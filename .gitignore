@@ -2,3 +2,4 @@
 CMakeListsPrivate.txt
 CMakeListsUser.txt
 cmake-build-*/
+!/CMakeListsUser.txt
