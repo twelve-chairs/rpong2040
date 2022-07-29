@@ -264,8 +264,8 @@ int main(){
     Player2 player2;
     Ball ball;
 
-
     setup(tft, localTime, player1, player2);
+
     while(true){
         try {
             loop(ledOn, tft, ball, player1, player2, lastPlayer, pixels);
